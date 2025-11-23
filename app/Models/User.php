@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'prodi',
         'tahun_masuk',
+        'nrp',
         'role',
         
     ];

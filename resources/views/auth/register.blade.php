@@ -18,6 +18,14 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- NRP -->
+        <div class="mt-4">
+            <x-input-label for="nrp" :value="__('NRP')" />
+            <x-text-input id="nrp" class="block mt-1 w-full" type="text" name="nrp" :value="old('nrp')"
+                required autocomplete="nrp" />
+            <x-input-error :messages="$errors->get('nrp')" class="mt-2" />
+        </div>
+
         <!-- Program Studi -->
         <div class="mt-4">
             <x-input-label for="prodi" :value="__('Program Studi')" />
@@ -25,21 +33,21 @@
                 class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
                 required>
                 <option value="">-- Pilih Program Studi --</option>
-                <option value="Teknik Informatika" {{ old('prodi') == 'Teknik Informatika' ? 'selected' : '' }}>Teknik
-                    Informatika</option>
-                <option value="Teknik Elektro" {{ old('prodi') == 'Teknik Elektro' ? 'selected' : '' }}>Teknik Elektro
+                <option value="Teknik Elektronika" {{ old('prodi') == 'Teknik Elektronika' ? 'selected' : '' }}>D3-Teknik
+                    Elektronika </option>
+                <option value="Teknik Elektronika" {{ old('prodi') == 'Teknik Elektronika' ? 'selected' : '' }}>D4-Teknik Elektronika
                 </option>
-                <option value="Teknik Mekatronika" {{ old('prodi') == 'Teknik Mekatronika' ? 'selected' : '' }}>Teknik
-                    Mekatronika</option>
+                <option value="Teknik Telekomuniksi" {{ old('prodi') == 'Teknik Telekomuniksi' ? 'selected' : '' }}>D3-Teknik Telekomuniksi
+                </option>
                 <option value="Teknik Telekomunikasi" {{ old('prodi') == 'Teknik Telekomunikasi' ? 'selected' : '' }}>
-                    Teknik Telekomunikasi</option>
+                    D4-Teknik Telekomunikasi</option>
                 <option value="Teknologi Rekayasa Internet"
-                    {{ old('prodi') == 'Teknologi Rekayasa Internet' ? 'selected' : '' }}>Teknologi Rekayasa Internet
+                    {{ old('prodi') == 'Teknologi Rekayasa Internet' ? 'selected' : '' }}>D4-Teknologi Rekayasa Internet
                 </option>
-                <option value="Teknologi Game" {{ old('prodi') == 'Teknologi Game' ? 'selected' : '' }}>Teknologi Game
+                <option value="Teknik Elektro Industri" {{ old('prodi') == 'Teknik Elektro Industri' ? 'selected' : '' }}>D3-Teknik Elektro Industri
                 </option>
-                <option value="Teknik Komputer" {{ old('prodi') == 'Teknik Komputer' ? 'selected' : '' }}>Teknik
-                    Komputer</option>
+                <option value="Teknik Elektro Industri" {{ old('prodi') == 'Teknik Elektro Industri' ? 'selected' : '' }}>D4-Teknik Elektro Industri
+                </option>
             </select>
             <x-input-error :messages="$errors->get('prodi')" class="mt-2" />
         </div>
