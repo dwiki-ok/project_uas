@@ -14,7 +14,7 @@
                     Profil Saya
                 </button>
                 <button onclick="showTab('mahasiswa-lain')"
-                    class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold hover:text-indigo-600">
+                    class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-600 font-semibold hover:text-indigo-600">
                     Mahasiswa Lain
                 </button>
             </div>
@@ -25,31 +25,45 @@
                     @if (isset($user))
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="col-span-1">
-                                <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded">
-                                    <h3 class="text-lg font-semibold">Profil Mahasiswa</h3>
-                                    <p class="mt-3"><strong>Nama:</strong> {{ $user->name }}</p>
-                                    <p class="mt-1"><strong>Nrp:</strong> {{ $user->nrp }}</p>
-                                    <p class="mt-1"><strong>Prodi:</strong> {{ $user->prodi ?? '-' }}</p>
-                                    <p class="mt-1"><strong>Tahun Masuk:</strong> {{ $user->tahun_masuk ?? '-' }}</p>
+                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                    <h3 class="text-2xl font-semibold text-indigo-600">Profil Mahasiswa</h3>
+                                    <p class="mt-3"><strong class="text-gray-600">Nama:</strong>
+                                        <span
+                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->name }}</span>
+                                    </p>
+                                    <p class="mt-1"><strong class="text-gray-600">Nrp:</strong>
+                                        <span
+                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->nrp }}</span>
+                                    </p>
+                                    <p class="mt-1"><strong class="text-gray-600">Prodi:</strong>
+                                        <span
+                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->prodi ?? '-' }}</span>
+                                    </p>
+                                    <p class="mt-1"><strong class="text-gray-600">Tahun Masuk:</strong>
+                                        <span
+                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->tahun_masuk ?? '-' }}</span>
+                                    </p>
                                 </div>
                             </div>
 
                             <div class="md:col-span-2">
-                                <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded">
-                                    <h3 class="text-lg font-semibold">Portofolio Saya</h3>
+                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                    <h3 class="text-lg font-semibold text-indigo-600">Portofolio Saya</h3>
                                     @if ($portfolios->isEmpty())
                                         <p class="mt-3 text-gray-600">Belum ada portofolio yang ditambahkan.</p>
                                     @else
-                                        <ul class="mt-3 space-y-3">
+                                        <ul class="mt-3 space-y-4">
                                             @foreach ($portfolios as $p)
-                                                <li class="p-3 bg-white dark:bg-gray-800 rounded border">
+                                                <li
+                                                    class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
                                                     <div class="flex items-center justify-between">
                                                         <div>
-                                                            <div class="font-semibold">{{ $p->nama_proyek }}</div>
-                                                            <div class="text-sm text-gray-600">
+                                                            <div class="font-semibold text-indigo-600 text-xl">
+                                                                {{ $p->nama_proyek }}</div>
+                                                            <div class="text-base text-gray-600">
                                                                 {{ \Illuminate\Support\Str::limit($p->deskripsi, 120) }}
                                                             </div>
-                                                            <div class="text-xs text-gray-500 mt-1">Keahlian:
+                                                            <div class="text-sm text-gray-500 mt-1">Keahlian:
                                                                 {{ $p->keahlian ?? '-' }}</div>
                                                         </div>
                                                     </div>
@@ -77,33 +91,44 @@
                             @foreach ($allMahasiswa as $m)
                                 @if ($m->id !== $user->id)
                                     <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                             <div class="col-span-1">
-                                                <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded">
-                                                    <h4 class="text-lg font-semibold">{{ $m->name }}</h4>
-                                                    <p class="mt-2 text-sm"><strong>Prodi:</strong>
-                                                        {{ $m->prodi ?? '-' }}</p>
-                                                    <p class="mt-1 text-sm"><strong>Tahun Masuk:</strong>
-                                                        {{ $m->tahun_masuk ?? '-' }}</p>
+                                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                                    <h4 class="text-2xl font-semibold text-indigo-600">
+                                                        {{ $m->name }}</h4>
+                                                    <p class="mt-2 text-lg"><strong class="text-gray-600">Nrp:</strong>
+                                                        <span
+                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->nrp }}</span>
+                                                    </p>
+                                                    <p class="mt-1 text-lg"><strong
+                                                            class="text-gray-600">Prodi:</strong>
+                                                        <span
+                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->prodi ?? '-' }}</span>
+                                                    </p>
+                                                    <p class="mt-1 text-lg"><strong class="text-gray-600">Tahun
+                                                            Masuk:</strong>
+                                                        <span
+                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->tahun_masuk ?? '-' }}</span>
+                                                    </p>
                                                 </div>
                                             </div>
 
                                             <div class="md:col-span-2">
-                                                <div class="p-4 bg-gray-50 dark:bg-gray-900 rounded">
-                                                    <h5 class="font-semibold">Portofolio</h5>
+                                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                                    <h5 class="font-semibold text-indigo-600">Portofolio</h5>
                                                     @if ($m->portfolios->isEmpty())
                                                         <p class="mt-2 text-sm text-gray-600">Belum ada portofolio.</p>
                                                     @else
-                                                        <ul class="mt-2 space-y-2">
+                                                        <ul class="mt-2 space-y-4">
                                                             @foreach ($m->portfolios as $p)
                                                                 <li
-                                                                    class="p-2 bg-white dark:bg-gray-800 rounded border text-sm">
-                                                                    <div class="font-semibold">{{ $p->nama_proyek }}
-                                                                    </div>
-                                                                    <div class="text-xs text-gray-600">
+                                                                    class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                                                                    <div class="font-semibold text-indigo-600 text-lg">
+                                                                        {{ $p->nama_proyek }}</div>
+                                                                    <div class="text-sm text-gray-600">
                                                                         {{ \Illuminate\Support\Str::limit($p->deskripsi, 100) }}
                                                                     </div>
-                                                                    <div class="text-xs text-gray-500 mt-1">Keahlian:
+                                                                    <div class="text-sm text-gray-500 mt-1">Keahlian:
                                                                         {{ $p->keahlian ?? '-' }}</div>
                                                                 </li>
                                                             @endforeach
