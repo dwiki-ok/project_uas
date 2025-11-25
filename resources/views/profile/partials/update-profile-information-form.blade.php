@@ -13,9 +13,27 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
+
+        <div>
+            <x-input-label for="profile_photo" :value="__('Foto Profil')" />
+            <div class="mt-2 flex items-center gap-4">
+                @if ($user->profile_photo)
+                    <img id="photoPreview" src="{{ asset('storage/' . $user->profile_photo) }}" alt="Profile Photo" class="w-24 h-24 rounded-full object-cover">
+                @else
+                    <div id="photoPreview" class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">No Photo</span>
+                    </div>
+                @endif
+                <div>
+                    <input id="profile_photo" name="profile_photo" type="file" class="block" accept="image/jpg,image/jpeg,image/png" onchange="previewPhoto(this)" />
+                    <p class="mt-2 text-xs text-gray-600 dark:text-gray-400">JPG atau PNG, maksimal 2MB</p>
+                </div>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('profile_photo')" />
+        </div>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
@@ -62,3 +80,30 @@
         </div>
     </form>
 </section>
+
+<script>
+function previewPhoto(input) {
+    const preview = document.getElementById('photoPreview');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // If preview is a div, replace it with img
+            if (preview.tagName === 'DIV') {
+                const img = document.createElement('img');
+                img.id = 'photoPreview';
+                img.src = e.target.result;
+                img.className = 'w-24 h-24 rounded-full object-cover';
+                img.alt = 'Profile Photo Preview';
+                preview.parentNode.replaceChild(img, preview);
+            } else {
+                // If preview is already an img, just update src
+                preview.src = e.target.result;
+            }
+        };
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>

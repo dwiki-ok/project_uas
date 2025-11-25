@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('nrp')->nullable();
             $table->string('password');
             $table->string('prodi')->nullable(); // Kolom untuk program studi
             $table->year('tahun_masuk')->nullable(); // Kolom untuk tahun masuk
             $table->string('role')->default('mahasiswa'); // Kolom untuk role user
+            $table->string('profile_photo')->nullable(); // Kolom untuk foto profil
             $table->rememberToken();
             $table->timestamps();
         });
@@ -48,8 +50,5 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
-        Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn(['nrp', 'role', 'prodi', 'tahun_masuk', 'keahlian']);
-    });
     }
 };

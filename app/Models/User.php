@@ -25,7 +25,7 @@ class User extends Authenticatable
         'tahun_masuk',
         'nrp',
         'role',
-        
+        'profile_photo',
     ];
 
     /**
