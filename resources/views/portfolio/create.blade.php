@@ -37,7 +37,10 @@
                         accept="application/pdf">
                 </div>
 
-                <button class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Simpan</button>
+                    <a href="{{ route('portfolio.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Batal</a>
+                </div>
             </form>
 
         </div>
