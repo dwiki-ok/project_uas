@@ -1,79 +1,92 @@
-<!DOCTYPE HTML>
-<!--
- Aerial by HTML5 UP
- html5up.net | @ajlkn
- Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>Project Laravel</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <noscript>
-        <link rel="stylesheet" href="{{ asset('assets/css/noscript.css') }}" />
-    </noscript>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:300,400,500,600,700&display=swap" rel="stylesheet" />
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<body class="antialiased font-sans">
 
-<body class="is-preload">
-    <div id="wrapper">
-        <div id="bg"></div>
-        <div id="overlay"></div>
-        <div id="main">
+    <div class="relative min-h-screen overflow-hidden">
 
-            <!-- Top Navigation -->
-            <nav class="topnav" aria-label="Main Navigation">
-                <div class="brand">Welcome</div>
-                <div class="nav-buttons">
+        {{-- Background perpustakaan + overlay lembut --}}
+        <div class="absolute inset-0 -z-10">
+            <img src="{{ asset('images/library-bg.png') }}"
+                 alt="Perpustakaan"
+                 class="w-full h-full object-cover">
+            {{-- overlay tipis supaya teks dan tombol tetap jelas --}}
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/65 via-slate-900/45 to-slate-900/25"></div>
+        </div>
 
-                    @if (Route::has('login'))
+        <div class="min-h-screen flex flex-col text-white">
 
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="button small">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="button small">Log In</a>
+            {{-- Konten utama: 2 kolom --}}
+            <main class="flex-1 flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 gap-10">
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="button alt small">Register</a>
-                            @endif
-                        @endauth
+                {{-- Kiri: Judul + tombol ke login --}}
+                <section class="max-w-xl space-y-6">
+                    <p class="text-xs tracking-[0.3em] uppercase text-blue-200">
+                        SELAMAT DATANG
+                    </p>
 
-                    @endif
-                </div>
-            </nav>
-            <!-- Header -->
-            <header id="header">
-                <h1>Direktori Portofolio</h1>
-                <p>Created by Kelompok 7</p>
-                <nav>
-                    <ul>
-                        <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
-                        </li>
-                        <li><a href="#" class="icon brands fa-linkedin-in"><span
-                                    class="label">LinkedIn</span></a></li>
-                        <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
-                        </li>
-                        <li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                        <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-                    </ul>
-                </nav>
-            </header>
+                    <h1 class="text-3xl md:text-4xl font-semibold leading-tight">
+                        Direktori Portofolio Mahasiswa
+                        <span class="block text-blue-300 mt-1 text-xl md:text-2xl">
+                            by Kelompok 7
+                        </span>
+                    </h1>
+
+                    <p class="text-sm md:text-base text-slate-200 max-w-md">
+                        Platform untuk menampilkan profil, portofolio, dan keahlian mahasiswa
+                        PENS
+                    </p>
+
+                    <div class="flex items-center gap-4 mt-4">
+                        <a href="{{ route('login') }}"
+                           class="inline-flex items-center justify-center px-6 py-2.5 rounded-full
+                                  bg-blue-600 hover:bg-blue-700 text-sm font-semibold
+                                  shadow-lg shadow-blue-500/40 transition">
+                            Masuk ke Aplikasi
+                        </a>
+
+                        <a href="{{ route('register') }}"
+                           class="hidden sm:inline-flex text-sm text-blue-200 hover:text-white underline-offset-4 hover:underline">
+                            Belum punya akun? Daftar
+                        </a>
+                    </div>
+                </section>
+
+<section class="hidden lg:flex flex-col items-center justify-center text-center
+                absolute right-1/4 top-1/2 -translate-y-1/2 gap-4">
+
+    {{-- Logo PENS lebih besar --}}
+    <img src="{{ asset('images/logo-pens.png') }}"
+         alt="Logo PENS"
+         class="h-48 md:h-56 w-auto drop-shadow-2xl">
+
+    {{-- Teks kampus --}}
+    <div class="leading-tight">
+        <div class="text-lg md:text-xl font-bold">
+            POLITEKNIK ELEKTRONIKA
+        </div>
+        <div class="text-lg md:text-xl font-bold">
+            NEGERI SURABAYA
         </div>
     </div>
-    <script>
-        window.onload = function() {
-            document.body.classList.remove('is-preload');
-        }
-        window.ontouchmove = function() {
-            return false;
-        }
-        window.onorientationchange = function() {
-            document.body.scrollTop = 0;
-        }
-    </script>
-</body>
 
+</section>
+
+
+            </main>
+
+        </div>
+    </div>
+
+</body>
 </html>
