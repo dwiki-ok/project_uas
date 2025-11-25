@@ -28,8 +28,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('portfolios');
-        Schema::table('portfolios', function (Blueprint $table) {
-        $table->dropColumn('pdf_file'); // Menghapus kolom pdf_file jika rollback
-    });
     }
 };

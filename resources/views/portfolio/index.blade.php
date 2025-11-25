@@ -13,19 +13,19 @@
                 <div class="p-4 bg-white rounded shadow mb-4 flex justify-between items-center gap-4">
 
                     <div class="flex-1 space-y-3 min-w-0">
-                        <div class="flex items-start">
+                        <div class="flex items-center">
                             <span class="font-bold text-lg w-32 shrink-0">Nama Project</span>
                             <span class="font-bold text-lg mr-2">:</span>
                             <span class="text-lg break-all">{{ $p->nama_proyek }}</span>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-center">
                             <span class="font-bold text-lg w-32 shrink-0">Deskripsi</span>
                             <span class="font-bold text-lg mr-2">:</span>
                             <span class="text-lg break-all">{{ $p->deskripsi }}</span>
                         </div>
 
-                        <div class="flex items-start">
+                        <div class="flex items-center">
                             <span class="font-bold text-lg w-32 shrink-0">Keahlian</span>
                             <span class="font-bold text-lg mr-2">:</span>
                             <span class="text-lg break-all">{{ $p->keahlian }}</span>
@@ -33,7 +33,7 @@
 
                         <!-- Menampilkan File PDF jika ada -->
                         @if ($p->pdf_file)
-                            <div class="flex items-start">
+                            <div class="flex items-center">
                                 <span class="font-bold text-lg w-32 shrink-0">CV</span>
                                 <span class="font-bold text-lg mr-2">:</span>
                                 <a href="{{ asset('storage/' . $p->pdf_file) }}" target="_blank"

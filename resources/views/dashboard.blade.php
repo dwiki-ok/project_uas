@@ -24,31 +24,37 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="col-span-1">
                                 <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
-                                    <h3 class="text-2xl font-semibold text-indigo-600">Profil Saya</h3>
-                                    <p class="mt-3"><strong class="text-gray-600 dark:text-gray-400">Nama:</strong>
-                                        <span
-                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->name }}</span>
-                                    </p>
-                                    <p class="mt-1"><strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
-                                        <span
-                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->nrp }}</span>
-                                    </p>
-                                    <p class="mt-1"><strong class="text-gray-600 dark:text-gray-400">Prodi:</strong>
-                                        <span
-                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->prodi ?? '-' }}</span>
-                                    </p>
-                                    <p class="mt-1"><strong class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
-                                        <span
-                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->tahun_masuk ?? '-' }}</span>
-                                    </p>
-                                    @if($portfolios && $portfolios->first() && $portfolios->first()->pdf_file)
-                                        <div class="mt-3">
-                                            <a href="{{ asset('storage/' . $portfolios->first()->pdf_file) }}" target="_blank" class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                                Lihat CV
-                                            </a>
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex-shrink-0">
+                                            @if($user->profile_photo)
+                                                <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="{{ $user->name }}" class="w-24 h-24 rounded-full object-cover">
+                                            @else
+                                                <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                                    <span class="text-gray-500 dark:text-gray-400 text-sm">No Photo</span>
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endif
+                                        <div class="min-w-0">
+                                            <h3 class="text-2xl font-semibold text-indigo-600">{{ $user->name }}</h3>
+                                            <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
+                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->nrp }}</span>
+                                            </p>
+                                            <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Prodi:</strong>
+                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->prodi ?? '-' }}</span>
+                                            </p>
+                                            <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
+                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->tahun_masuk ?? '-' }}</span>
+                                            </p>
+                                            @if($portfolios && $portfolios->first() && $portfolios->first()->pdf_file)
+                                                <div class="mt-3">
+                                                    <a href="{{ asset('storage/' . $portfolios->first()->pdf_file) }}" target="_blank" class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                                        Lihat CV
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -104,30 +110,37 @@
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                                             <div class="col-span-1">
                                                 <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
-                                                    <h4 class="text-2xl font-semibold text-indigo-600">
-                                                        {{ $m->name }}</h4>
-                                                    <p class="mt-2 text-lg"><strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
-                                                        <span
-                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->nrp }}</span>
-                                                    </p>
-                                                    <p class="mt-1 text-lg"><strong
-                                                            class="text-gray-600 dark:text-gray-400">Prodi:</strong>
-                                                        <span
-                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->prodi ?? '-' }}</span>
-                                                    </p>
-                                                    <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Tahun
-                                                            Masuk:</strong>
-                                                        <span
-                                                            class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->tahun_masuk ?? '-' }}</span>
-                                                    </p>
-                                                    @if($m->portfolios && $m->portfolios->first() && $m->portfolios->first()->pdf_file)
-                                                        <div class="mt-3">
-                                                            <a href="{{ asset('storage/' . $m->portfolios->first()->pdf_file) }}" target="_blank" class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                                                Lihat CV
-                                                            </a>
+                                                    <div class="flex items-center gap-4">
+                                                        <div class="flex-shrink-0">
+                                                            @if($m->profile_photo)
+                                                                <img src="{{ asset('storage/' . $m->profile_photo) }}" alt="{{ $m->name }}" class="w-24 h-24 rounded-full object-cover">
+                                                            @else
+                                                                <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                                                    <span class="text-gray-500 dark:text-gray-400 text-sm">No Photo</span>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                    @endif
+                                                        <div class="min-w-0">
+                                                            <h4 class="text-2xl font-semibold text-indigo-600">{{ $m->name }}</h4>
+                                                            <p class="mt-2 text-lg"><strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
+                                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->nrp }}</span>
+                                                            </p>
+                                                            <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Prodi:</strong>
+                                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->prodi ?? '-' }}</span>
+                                                            </p>
+                                                            <p class="mt-1 text-lg"><strong class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
+                                                                <span class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->tahun_masuk ?? '-' }}</span>
+                                                            </p>
+                                                            @if($m->portfolios && $m->portfolios->first() && $m->portfolios->first()->pdf_file)
+                                                                <div class="mt-3">
+                                                                    <a href="{{ asset('storage/' . $m->portfolios->first()->pdf_file) }}" target="_blank" class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                                                        Lihat CV
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -146,8 +159,7 @@
                                                                     <div class="text-sm text-gray-600 dark:text-gray-300">
                                                                         {{ \Illuminate\Support\Str::limit($p->deskripsi, 100) }}
                                                                     </div>
-                                                                    <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Keahlian:
-                                                                        {{ $p->keahlian ?? '-' }}</div>
+                                                                    <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">Keahlian: {{ $p->keahlian ?? '-' }}</div>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
