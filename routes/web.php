@@ -7,6 +7,7 @@ use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MahasiswaController;
 use App\Http\Controllers\Admin\PortfolioController as AdminPortfolioController;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,7 +17,10 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified', ])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = request()->user();
+        $portfolios = $user ? $user->portfolios()->latest()->get() : collect();
+        $allMahasiswa = User::where('role', 'mahasiswa')->with('portfolios')->get();
+        return view('dashboard', compact('user', 'portfolios', 'allMahasiswa'));
     })->name('dashboard');
 
     // Profile (untuk mahasiswa)
