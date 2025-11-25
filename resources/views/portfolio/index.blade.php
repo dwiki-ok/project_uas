@@ -34,10 +34,10 @@
                         <!-- Menampilkan File PDF jika ada -->
                         @if ($p->pdf_file)
                             <div class="flex items-start">
-                                <span class="font-bold text-lg w-32 shrink-0">Sertifikat</span>
+                                <span class="font-bold text-lg w-32 shrink-0">CV</span>
                                 <span class="font-bold text-lg mr-2">:</span>
                                 <a href="{{ asset('storage/' . $p->pdf_file) }}" target="_blank"
-                                    class="text-blue-500 hover:text-blue-700">Lihat Sertifikat</a>
+                                    class="text-blue-500 hover:text-blue-700">Lihat CV</a>
                             </div>
                         @endif
                     </div>
