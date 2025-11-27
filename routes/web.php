@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Portofolio mahasiswa
     Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+    Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
     Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.create');
     Route::post('/portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
     Route::get('/portfolio/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit');

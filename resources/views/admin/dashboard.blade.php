@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
             {{ __('Dashboard Administrator') }}
         </h2>
     </x-slot>
@@ -9,10 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Welcome Banner -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
-                <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-medium text-gray-900">Selamat Datang, Admin!</h3>
-                    <p class="mt-1 text-gray-600">Ini adalah pusat kendali aplikasi. Anda dapat mengelola mahasiswa dan
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Selamat Datang, Admin!</h3>
+                    <p class="mt-1 text-gray-600 dark:text-gray-400">Ini adalah pusat kendali aplikasi. Anda dapat mengelola mahasiswa dan
                         memantau portofolio dari sini.</p>
                 </div>
             </div>
@@ -20,8 +20,8 @@
             <!-- Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <!-- Card 1: Jumlah Mahasiswa -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-indigo-500">
-                    <div class="p-6">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-indigo-500">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-indigo-100 text-indigo-500 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -44,8 +44,8 @@
                 </div>
 
                 <!-- Card 2: Jumlah Portofolio -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-green-500">
-                    <div class="p-6">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-green-500">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -66,8 +66,8 @@
                 </div>
 
                 <!-- Card 3: Pintasan Cepat -->
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-yellow-500">
-                    <div class="p-6">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg border-l-4 border-yellow-500">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -82,7 +82,7 @@
                         </div>
                         <div class="mt-4 flex space-x-2">
                             <a href="{{ route('admin.create') }}"
-                                class="bg-indigo-600 text-white text-xs font-bold py-2 px-3 rounded hover:bg-indigo-700">
+                                class="bg-indigo-600 text-white text-xs font-bold py-2 px-3 rounded hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-700">
                                 + Mahasiswa
                             </a>
                             <!-- Anda bisa menambah tombol lain di sini -->
@@ -91,8 +91,119 @@
                 </div>
             </div>
 
-            <!-- Bagian ini bisa diisi tabel aktivitas terbaru jika controller sudah mengirim datanya -->
+            <!-- Expanded dashboard: recent portfolios, students per prodi, latest students, photo stats -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left: Recent Portfolios -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold">Portofolio Terbaru</h4>
+                                <a href="{{ route('portfolio.index') }}" class="text-sm text-indigo-600 hover:text-indigo-900 dark:text-indigo-400">Lihat Semua</a>
+                            </div>
 
+                            @if(isset($recentPortfolios) && $recentPortfolios->count())
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                        <thead class="bg-gray-50 dark:bg-gray-900">
+                                            <tr>
+                                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Judul</th>
+                                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Pemilik</th>
+                                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300">Tahun Masuk</th>
+                                                <th class="px-4 py-2 text-center text-xs font-medium text-gray-500">Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                            @foreach($recentPortfolios as $portfolio)
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-900">
+                                                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-100">{{ $portfolio->nama_proyek ?? 'Untitled' }}</td>
+                                                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-100">{{ $portfolio->user?->name ?? 'Unknown' }}</td>
+                                                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-100">{{ $portfolio->user?->tahun_masuk ?? '-' }}</td>
+                                                    <td class="px-4 py-3 text-sm text-center">
+                                                        <a href="{{ route('portfolio.show', $portfolio->id) }}" class="text-indigo-600 hover:underline dark:text-indigo-400">Lihat</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <div class="text-gray-500">Belum ada portofolio terbaru.</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <h4 class="text-lg font-semibold mb-3">Distribusi Mahasiswa per Prodi</h4>
+                            @if(isset($studentsPerProdi) && $studentsPerProdi->count())
+                                <div class="space-y-3">
+                                    @foreach($studentsPerProdi as $row)
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-sm text-gray-700 dark:text-gray-100">{{ $row->prodi ?? 'Umum' }}</div>
+                                            <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">{{ $row->total }}</div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="text-gray-500">Belum ada data prodi.</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Latest Students + Photo Stats -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <h4 class="text-lg font-semibold">Mahasiswa Terbaru</h4>
+                            @if(isset($latestStudents) && $latestStudents->count())
+                                <ul class="mt-4 space-y-3">
+                                    @foreach($latestStudents as $s)
+                                        <li class="flex items-center gap-3">
+                                            @if($s->profile_photo)
+                                                <img src="{{ asset('storage/' . $s->profile_photo) }}" alt="avatar" class="h-10 w-10 rounded-full object-cover">
+                                            @else
+                                                <div class="h-10 w-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-200">{{ Str::substr($s->name,0,1) }}</div>
+                                            @endif
+                                            <div class="text-sm">
+                                                <div class="font-medium text-gray-900 dark:text-gray-100">{{ $s->name }}</div>
+                                                <div class="text-xs text-gray-500 dark:text-gray-400">{{ $s->prodi ?? 'Umum' }}</div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <div class="text-gray-500">Belum ada mahasiswa baru.</div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 dark:text-gray-100">
+                            <h4 class="text-lg font-semibold">Status Foto Profil</h4>
+                            <div class="mt-3">
+                                <div class="flex items-center justify-between text-sm text-gray-700 dark:text-gray-100">
+                                    <div>Dengan Foto</div>
+                                    <div class="font-semibold">{{ $studentsWithPhoto ?? 0 }}</div>
+                                </div>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded mt-2 overflow-hidden">
+                                    @php
+                                        $total = ($studentCount > 0) ? $studentCount : 1;
+                                        $percent = intval((($studentsWithPhoto ?? 0) / $total) * 100);
+                                    @endphp
+                                    <div class="h-2 bg-indigo-600" style="width: {{ $percent }}%"></div>
+                                </div>
+
+                                <div class="flex items-center justify-between text-sm text-gray-700 dark:text-gray-100 mt-3">
+                                    <div>Tanpa Foto</div>
+                                    <div class="font-semibold">{{ $studentsWithoutPhoto ?? 0 }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

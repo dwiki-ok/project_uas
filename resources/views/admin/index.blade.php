@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
             {{ __('Student Account Management') }}
         </h2>
     </x-slot>
@@ -10,7 +10,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <div
-                    class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-indigo-500 flex justify-between items-center">
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border-l-4 border-indigo-500 flex justify-between items-center text-gray-900 dark:text-gray-100">
                     <div>
                         <p class="text-xs text-gray-500 font-bold uppercase">Total Mahasiswa</p>
                         <p class="text-2xl font-bold text-gray-900">{{ $students->count() }}</p>
@@ -25,7 +25,7 @@
                 </div>
 
                 <div
-                    class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-500 flex justify-between items-center">
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border-l-4 border-green-500 flex justify-between items-center text-gray-900 dark:text-gray-100">
                     <div>
                         <p class="text-xs text-gray-500 font-bold uppercase">Prodi Aktif</p>
                         <p class="text-2xl font-bold text-gray-900">{{ $students->unique('prodi')->count() }}</p>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div
-                    class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-blue-500 flex justify-between items-center">
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border-l-4 border-blue-500 flex justify-between items-center text-gray-900 dark:text-gray-100">
                     <div>
                         <p class="text-xs text-gray-500 font-bold uppercase">Angkatan Terbaru</p>
                         <p class="text-2xl font-bold text-gray-900">{{ $students->max('tahun_masuk') ?? '-' }}</p>
@@ -55,7 +55,7 @@
                 </div>
 
                 <div
-                    class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500 flex justify-between items-center">
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 border-l-4 border-yellow-500 flex justify-between items-center text-gray-900 dark:text-gray-100">
                     <div>
                         <p class="text-xs text-gray-500 font-bold uppercase">Data Portofolio</p>
                         <p class="text-2xl font-bold text-gray-900">
@@ -72,12 +72,12 @@
                 </div>
             </div>
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     @if (session('success'))
                         <div x-data="{ show: true }" x-show="show" x-transition.duration.500ms
-                            class="mb-6 flex items-center justify-between bg-green-50 border-l-4 border-green-500 text-green-700 px-4 py-3 rounded shadow-sm"
+                            class="mb-6 flex items-center justify-between bg-green-50 dark:bg-green-900 border-l-4 border-green-500 text-green-700 dark:text-green-200 px-4 py-3 rounded shadow-sm"
                             role="alert">
                             <div class="flex items-center">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@
                             <div class="flex items-center">
                                 <span class="text-sm text-gray-500 mr-2">Show</span>
                                 <select id="rowsPerPage" onchange="changeRowsPerPage()"
-                                    class="form-select block w-20 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                    class="form-select block w-20 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     <option value="5">5</option>
                                     <option value="10" selected>10</option>
                                     <option value="25">25</option>
@@ -115,19 +115,19 @@
 
                             <div class="relative w-full sm:w-64">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                                    <svg class="h-5 w-5 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
                                 </div>
                                 <input type="text" id="searchInput" placeholder="Cari Nama, NRP..."
-                                    class="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    class="pl-10 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     onkeyup="processTable()">
                             </div>
 
                             <select id="prodiFilter" onchange="processTable()"
-                                class="block w-full sm:w-48 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                class="block w-full sm:w-48 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 <option value="">Semua Prodi</option>
                                 @foreach ($students->unique('prodi')->pluck('prodi') as $prodi)
                                     @if ($prodi)
@@ -149,7 +149,7 @@
                             </button>
 
                             <a href="{{ route('admin.create') }}"
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 shadow-md">
+                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150 shadow-md dark:bg-indigo-600 dark:hover:bg-indigo-700">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 4v16m8-8H4"></path>
@@ -159,16 +159,16 @@
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
-                        <table class="min-w-full divide-y divide-gray-200" id="mainTable">
-                            <thead class="bg-gray-50">
+                    <div class="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700" id="mainTable">
+                            <thead class="bg-gray-50 dark:bg-gray-900">
                                 <tr>
                                     <th class="px-6 py-3 w-10">
                                         <input type="checkbox" id="selectAll" onchange="toggleSelectAll()"
                                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     </th>
                                     <th scope="col" onclick="sortTable(1)"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 group">
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 group">
                                         <div class="flex items-center">
                                             Mahasiswa
                                             <span
@@ -197,9 +197,9 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="tableBody">
+                                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700" id="tableBody">
                                 @forelse($students as $student)
-                                    <tr class="hover:bg-gray-50 transition-colors student-row group">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors student-row group">
                                         <td class="px-6 py-4">
                                             <input type="checkbox"
                                                 class="row-checkbox rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
@@ -208,25 +208,25 @@
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
                                                     <div
-                                                        class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold border border-indigo-200">
+                                                        class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-200 font-bold border border-indigo-200 dark:border-indigo-700">
                                                         {{ substr($student->name, 0, 1) }}{{ substr(strrchr($student->name, ' '), 1, 1) }}
                                                     </div>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <div class="text-sm font-medium text-gray-900 student-name">
-                                                        {{ $student->name }}</div>
-                                                    <div class="text-xs text-gray-500">{{ $student->email }}</div>
-                                                </div>
+                                                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100 student-name">
+                                                            {{ $student->name }}</div>
+                                                        <div class="text-xs text-gray-500 dark:text-gray-400">{{ $student->email }}</div>
+                                                    </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span
-                                                class="student-nrp font-mono text-sm text-gray-700 bg-gray-100 px-2 py-1 rounded">{{ $student->nrp }}</span>
+                                                class="student-nrp font-mono text-sm text-gray-700 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">{{ $student->nrp }}</span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex flex-col">
                                                 <span
-                                                    class="student-prodi text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full w-max mb-1">
+                                                    class="student-prodi text-xs font-semibold text-blue-600 dark:text-blue-200 bg-blue-100 dark:bg-blue-900 px-2 py-0.5 rounded-full w-max mb-1">
                                                     {{ $student->prodi ?? 'Umum' }}
                                                 </span>
                                                 <span class="text-xs text-gray-500">
@@ -245,7 +245,7 @@
                                                     class="inline-block">
                                                     @csrf @method('DELETE')
                                                     <button type="submit"
-                                                        class="p-1.5 bg-red-100 text-red-600 rounded-md hover:bg-red-200"
+                                                        class="p-1.5 bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-200 rounded-md hover:bg-red-200 dark:hover:bg-red-800"
                                                         title="Hapus">
                                                         <svg class="w-5 h-5" fill="none" stroke="currentColor"
                                                             viewBox="0 0 24 24">
