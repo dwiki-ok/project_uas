@@ -41,15 +41,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
-    Route::get('/admin/{id}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-    Route::put('/admin/{id}', [AdminController::class, 'update'])->name('admin.update');
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
     // Pengelolaan Portofolio Mahasiswa
     Route::get('/admin/{id}/portfolios', [AdminController::class, 'managePortfolios'])->name('admin.managePortfolios');
     Route::delete('/admin/portfolios/{portfolioId}', [AdminController::class, 'destroyPortfolio'])->name('admin.destroyPortfolio');
 
-    // Statistik Mahasiswa dan Portofolio
+    // Untuk kemudahan: buka 'admin.dashboard' akan menampilkan halaman Kelola Mahasiswa (index)
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 

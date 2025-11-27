@@ -1,7 +1,4 @@
 <?php
-
-// app/Http/Middleware/IsAdmin.php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -18,21 +15,21 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // 1. Pastikan pengguna sudah login
+        // memastikan pengguna sudah login
         if (!Auth::check()) {
-            return redirect('login'); // Arahkan ke halaman login jika belum login
+            return redirect('login'); // kembali ke login 
         }
 
-        // 2. Periksa peran (role) pengguna
+        // Periksa (role) pengguna
         $user = Auth::user();
 
-        // Asumsi: Anda memiliki kolom 'role' di tabel 'users'
-        // dan nilai untuk admin adalah 'admin'.
+        
+        // periksa  role apakah admin atau mahasiswa  
         if ($user->role === 'admin') {
-            return $next($request); // Lanjutkan permintaan jika pengguna adalah admin
+            return $next($request); // ke dashboard admin
         }
 
-        // 3. Jika pengguna bukan admin, tolak akses dan arahkan ke halaman lain
+        // Jika pengguna bukan admin, akan ditolak akses 
         return redirect('dashboard')->with('error', 'Anda tidak memiliki akses sebagai Admin.');
     }
 }
