@@ -25,6 +25,12 @@ class PortfolioController extends Controller
         $portfolio = Portfolio::findOrFail($id);
         return view('portfolio.edit', compact('portfolio'));
     }
+
+    public function show($id)
+    {
+        $portfolio = Portfolio::with('user')->findOrFail($id);
+        return view('portfolio.show', compact('portfolio'));
+    }
     public function update(Request $request, $id)
     {
         $request->validate([

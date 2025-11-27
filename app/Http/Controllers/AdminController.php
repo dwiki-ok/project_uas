@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controllers\HasMiddleware;   
 use App\Models\User;
 use App\Models\Portfolio;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; 
@@ -157,9 +158,32 @@ class AdminController extends Controller implements HasMiddleware
     // Halaman dashboard admin
     public function dashboard()
     {
-        $studentCount    = User::where('role', 'mahasiswa')->count();
-        $portfolioCount  = Portfolio::count();
+        $studentCount         = User::where('role', 'mahasiswa')->count();
+        $portfolioCount       = Portfolio::count();
+        $studentsWithPhoto    = User::where('role', 'mahasiswa')->whereNotNull('profile_photo')->count();
+        $studentsWithoutPhoto = User::where('role', 'mahasiswa')->whereNull('profile_photo')->count();
 
-        return view('admin.dashboard', compact('studentCount', 'portfolioCount'));
+        // Recent portfolios (with related user)
+        $recentPortfolios = Portfolio::with('user')->latest()->take(6)->get();
+
+        // Latest registered students
+        $latestStudents = User::where('role', 'mahasiswa')->latest('created_at')->take(6)->get();
+
+        // Students per prodi
+        $studentsPerProdi = User::where('role', 'mahasiswa')
+            ->select('prodi', DB::raw('count(*) as total'))
+            ->groupBy('prodi')
+            ->orderByDesc('total')
+            ->get();
+
+        return view('admin.dashboard', compact(
+            'studentCount',
+            'portfolioCount',
+            'studentsWithPhoto',
+            'studentsWithoutPhoto',
+            'recentPortfolios',
+            'latestStudents',
+            'studentsPerProdi'
+        ));
     }
 }
