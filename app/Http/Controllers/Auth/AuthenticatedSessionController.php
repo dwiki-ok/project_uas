@@ -16,9 +16,7 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+
     public function create(): View
     {
         return view('auth.login');
@@ -32,17 +30,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        // --- TAMBAHKAN LOGIKA INI ---
         
-        // Cek jika user adalah admin
-        if ($request->user()->role === 'admin') {
-            // Arahkan ke halaman Kelola Mahasiswa (admin.index)
-            // Atau ganti ke 'admin.dashboard' jika ingin ke dashboard statistik
-            return redirect()->intended(route('admin.index', absolute: false));
+        // Cek jika user adalah admin -> arahkan ke admin dashboard
+        if ($request->user() && $request->user()->role === 'admin') {
+            // Arahkan ke route admin.dashboard (setelah ini, admin.dashboard akan membuka Kelola Mahasiswa)
+            return redirect()->intended(route('admin.dashboard', absolute: false));
         }
-
-        // --- AKHIR LOGIKA TAMBAHAN ---
 
         // Jika bukan admin (mahasiswa), arahkan ke dashboard biasa
         return redirect()->intended(route('dashboard', absolute: false));

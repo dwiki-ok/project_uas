@@ -3,28 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Controllers\HasMiddleware; // PENTING: Import Interface ini
-use Illuminate\Routing\Controllers\Middleware;    // PENTING: Import Class ini
+use Illuminate\Routing\Controllers\HasMiddleware;   
 use App\Models\User;
 use App\Models\Portfolio;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; 
 
-// PENTING: Tambahkan "implements HasMiddleware" di sini
 class AdminController extends Controller implements HasMiddleware
 {
-    /**
-     * Pengganti __construct() di Laravel 11.
-     * Mendefinisikan middleware yang berlaku untuk controller ini.
-     */
     public static function middleware(): array
     {
         return [
-            // Pastikan 'admin' sesuai dengan alias yang Anda buat di bootstrap/app.php
             'admin', 
-            
-            // Opsional: Jika ingin memastikan user login juga
-            // 'auth', 
         ];
     }
 
@@ -35,45 +26,56 @@ class AdminController extends Controller implements HasMiddleware
         return view('admin.index', compact('students'));
     }
 
-    // Redirect ke form register untuk tambah mahasiswa
+    // Menambahkan data mahasiswa baru
     public function create()
     {
-        return redirect()->route('register');
+        return view('admin.create');
     }
 
-    // Menyimpan data mahasiswa baru
     public function store(Request $request)
-    {
-        $request->validate([
-            'name'          => 'required|string|max:255',
-            'email'         => 'required|email|unique:users,email',
-            'password'      => 'required|min:8|confirmed',
-            'nrp'           => 'required|unique:users,nrp',
-            'prodi'         => 'nullable|string',
-            'tahun_masuk'   => 'nullable|integer',
-        ]);
+{
+    // Validate the form data
+    $request->validate([
+        'name'          => 'required|string|max:255',
+        'email'         => 'required|email|unique:users,email',
+        'password'      => 'required|min:8|confirmed',
+        'nrp'           => 'required|unique:users,nrp',
+        'prodi'         => 'nullable|string',
+        'tahun_masuk'   => 'nullable|integer',
+        'photo'         => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+    ]);
 
-        $user = new User();
-        $user->name         = $request->name;
-        $user->email        = $request->email;
-        $user->password     = Hash::make($request->password);
-        $user->nrp          = $request->nrp;
-        $user->prodi        = $request->prodi;
-        $user->tahun_masuk  = $request->tahun_masuk;
-        $user->role         = 'mahasiswa';
-        $user->save();
-
-        return redirect()->route('admin.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+    // Handle photo upload
+    $photoPath = null;
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('photos', 'public');
     }
 
-    // Menampilkan form edit mahasiswa
+    // Create new user (mahasiswa)
+    $user = new User();
+    $user->name         = $request->name;
+    $user->email        = $request->email;
+    $user->password     = Hash::make($request->password);
+    $user->nrp          = $request->nrp;
+    $user->prodi        = $request->prodi;
+    $user->tahun_masuk  = $request->tahun_masuk;
+    $user->role         = 'mahasiswa';
+    $user->profile_photo = $photoPath;  
+    $user->save();  
+
+    // Redirect back to the list with success message
+    return redirect()->route('admin.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+}
+
+
+     
     public function edit($id)
     {
         $student = User::findOrFail($id);
         return view('admin.edit', compact('student'));
     }
 
-    // Memperbarui data mahasiswa
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -83,31 +85,53 @@ class AdminController extends Controller implements HasMiddleware
             'nrp'           => 'required|unique:users,nrp,' . $id,
             'prodi'         => 'nullable|string',
             'tahun_masuk'   => 'nullable|integer',
+            'photo'         => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $user = User::findOrFail($id);
+
+        
         $user->name         = $request->name;
         $user->email        = $request->email;
         $user->nrp          = $request->nrp;
         $user->prodi        = $request->prodi;
         $user->tahun_masuk  = $request->tahun_masuk;
 
-        if ($request->password) {
+        // Cek apakah ada foto baru yang diupload
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada 
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                Storage::disk('public')->delete($user->photo);
+            }
+            
+            //  Simpan foto 
+            $newPhotoPath = $request->file('photo')->store('photos', 'public');
+            $user->photo = $newPhotoPath;
+        }
+        
+        
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
 
         $user->save();
 
-        return redirect()->route('admin.index')->with('success', 'Mahasiswa berhasil diperbarui.');
+        return redirect()->route('admin.index')->with('success', 'Data Mahasiswa berhasil diperbarui.');
     }
 
-    // Menghapus mahasiswa
+    
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+
+        // Hapus foto profil dari penyimpanan folder 
+        if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+            Storage::disk('public')->delete($user->photo);
+        }
+
         $user->delete();
 
-        return redirect()->route('admin.index')->with('success', 'Mahasiswa berhasil dihapus.');
+        return redirect()->route('admin.index')->with('success', 'Data Mahasiswa berhasil dihapus.');
     }
 
     // Menampilkan daftar portofolio mahasiswa
@@ -123,6 +147,8 @@ class AdminController extends Controller implements HasMiddleware
     public function destroyPortfolio($portfolioId)
     {
         $portfolio = Portfolio::findOrFail($portfolioId);
+        
+        
         $portfolio->delete();
 
         return redirect()->back()->with('success', 'Portofolio berhasil dihapus.');

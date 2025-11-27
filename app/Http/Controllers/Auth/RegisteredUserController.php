@@ -31,9 +31,10 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'nrp' => ['required', 'string', 'max:50', 'unique:'.User::class],
-            'prodi' => ['required', 'string', 'max:255'], // <-- Tambahkan ini
+            // remove unsupported 'lowercase' rule and use table name for unique
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'nrp' => ['required', 'string', 'max:50', 'unique:users,nrp'],
+            'prodi' => ['required', 'string', 'max:255'],
             'tahun_masuk' => ['required', 'integer', 'min:2000', 'max:2030'], 
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
