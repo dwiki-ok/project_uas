@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminPortfolioController; 
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,8 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Portofolio mahasiswa
     Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
-    Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
     Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('portfolio.create');
+    Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
     Route::post('/portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
     Route::get('/portfolio/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit');
     Route::put('/portfolio/{portfolio}', [PortfolioController::class, 'update'])->name('portfolio.update');
@@ -44,12 +45,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
     Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
-    // Pengelolaan Portofolio Mahasiswa
-    Route::get('/admin/{id}/portfolios', [AdminController::class, 'managePortfolios'])->name('admin.managePortfolios');
-    Route::delete('/admin/portfolios/{portfolioId}', [AdminController::class, 'destroyPortfolio'])->name('admin.destroyPortfolio');
-
     // Untuk kemudahan: buka 'admin.dashboard' akan menampilkan halaman Kelola Mahasiswa (index)
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Menampilkan Semua Portofolio (Halaman Tabel)
+    Route::get('/admin/all-portfolios', [AdminPortfolioController::class, 'index'])
+        ->name('admin.portfolios.index');
+
+    // 2. Form Edit Portofolio (oleh Admin)
+    Route::get('/admin/all-portfolios/{id}/edit', [AdminPortfolioController::class, 'edit'])
+        ->name('admin.portfolios.edit');
+
+    // 3. Proses Update Portofolio (oleh Admin)
+    Route::put('/admin/all-portfolios/{id}', [AdminPortfolioController::class, 'update'])
+        ->name('admin.portfolios.update');
+
+    // 4. Hapus Portofolio (oleh Admin)
+    Route::delete('/admin/all-portfolios/{id}', [AdminPortfolioController::class, 'destroy'])
+        ->name('admin.portfolios.destroy');
 });
 
 require __DIR__.'/auth.php';
