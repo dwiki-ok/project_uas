@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-                    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     @if (session('success'))
@@ -115,8 +115,8 @@
 
                             <div class="relative w-full sm:w-64">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
+                                    <svg class="h-5 w-5 text-gray-400 dark:text-gray-400" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -163,10 +163,6 @@
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700" id="mainTable">
                             <thead class="bg-gray-50 dark:bg-gray-900">
                                 <tr>
-                                    <th class="px-6 py-3 w-10">
-                                        <input type="checkbox" id="selectAll" onchange="toggleSelectAll()"
-                                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    </th>
                                     <th scope="col" onclick="sortTable(1)"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 group">
                                         <div class="flex items-center">
@@ -197,26 +193,32 @@
                                     </th>
                                 </tr>
                             </thead>
-                                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700" id="tableBody">
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700"
+                                id="tableBody">
                                 @forelse($students as $student)
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors student-row group">
-                                        <td class="px-6 py-4">
-                                            <input type="checkbox"
-                                                class="row-checkbox rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                        </td>
+                                    <tr
+                                        class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors student-row group">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 h-10 w-10">
-                                                    <div
-                                                        class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-200 font-bold border border-indigo-200 dark:border-indigo-700">
-                                                        {{ substr($student->name, 0, 1) }}{{ substr(strrchr($student->name, ' '), 1, 1) }}
-                                                    </div>
+                                                    @if ($student->profile_photo)
+                                                        <img class="h-10 w-10 rounded-full object-cover border border-gray-200 shadow-sm"
+                                                            src="{{ asset('storage/' . $student->profile_photo) }}"
+                                                            alt="{{ $student->name }}">
+                                                    @else
+                                                        <div
+                                                            class="h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-700 dark:text-indigo-200 font-bold border border-indigo-200 dark:border-indigo-700">
+                                                            {{ substr($student->name, 0, 1) }}{{ substr(strrchr($student->name, ' '), 1, 1) }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900 dark:text-gray-100 student-name">
-                                                            {{ $student->name }}</div>
-                                                        <div class="text-xs text-gray-500 dark:text-gray-400">{{ $student->email }}</div>
-                                                    </div>
+                                                    <div
+                                                        class="text-sm font-medium text-gray-900 dark:text-gray-100 student-name">
+                                                        {{ $student->name }}</div>
+                                                    <div class="text-xs text-gray-500 dark:text-gray-400">
+                                                        {{ $student->email }}</div>
+                                                </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -499,17 +501,6 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
-
-        // 7. SELECT ALL CHECKBOX
-        function toggleSelectAll() {
-            const masterCheckbox = document.getElementById('selectAll');
-            const checkboxes = document.querySelectorAll('.row-checkbox');
-            checkboxes.forEach(cb => {
-                if (cb.closest('tr').style.display !== 'none') {
-                    cb.checked = masterCheckbox.checked;
-                }
-            });
         }
     </script>
 </x-app-layout>

@@ -8,8 +8,9 @@
 
                 <div class="absolute left-0 top-0 hidden md:block">
                     <a href="{{ route('admin.dashboard') }}"
-                        class="group inline-flex items-center px-5 py-2.5 bg-white text-indigo-700 font-medium text-sm rounded-xl border border-indigo-100 shadow-sm hover:shadow-md hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">
-                        <svg class="w-5 h-5 mr-2 text-indigo-500 group-hover:-translate-x-1 transition-transform duration-300"
+                        class="group inline-flex items-center px-5 py-2.5 bg-white text-gray-600 font-medium text-sm rounded-xl border border-gray-200 shadow-sm  hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:shadow-md  active:bg-blue-700 
+                        transition-all duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <svg class="w-5 h-5 mr-2 text-gray-400 group-hover:text-white group-hover:-translate-x-1 transition-all duration-300"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -125,17 +126,27 @@
                     <tbody class="divide-y divide-gray-100">
                         @foreach ($portfolios as $portfolio)
                             <tr class="hover:bg-gray-50 transition-colors duration-150 group">
+
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
-                                        <div
-                                            class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 text-indigo-600 flex items-center justify-center font-bold text-sm uppercase mr-3 ring-2 ring-white shadow-sm">
-                                            {{ substr($portfolio->user->name ?? 'U', 0, 2) }}
+
+                                        <div class="flex-shrink-0 mr-3">
+                                            @if ($portfolio->user->profile_photo)
+                                                <img class="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm"
+                                                    src="{{ asset('storage/' . $portfolio->user->profile_photo) }}"
+                                                    alt="{{ $portfolio->user->name }}">
+                                            @else
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 text-indigo-600 flex items-center justify-center font-bold text-sm uppercase ring-2 ring-white shadow-sm">
+                                                    {{ substr($portfolio->user->name ?? 'U', 0, 2) }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <div>
                                             <p class="font-bold text-gray-900 text-sm">
-                                                {{ $portfolio->user->name ?? 'User Hapus' }}</p>
+                                                {{ $portfolio->user->name ?? 'User Hapus' }}
+                                            </p>
                                             <p class="text-xs text-gray-500">{{ $portfolio->user->email ?? '-' }}</p>
-                                            {{-- <p class="text-[10px] text-gray-400 mt-0.5">{{ $portfolio->user->prodi ?? '' }}</p> --}}
                                         </div>
                                     </div>
                                 </td>

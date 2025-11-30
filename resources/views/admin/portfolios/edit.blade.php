@@ -10,7 +10,11 @@
             </div>
 
             <a href="{{ route('admin.portfolios.index') }}"
-                class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all">
+                class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 
+           hover:bg-blue-600 hover:text-white hover:border-blue-600 
+           active:bg-blue-700 
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
+           shadow-sm transition-all">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
@@ -103,7 +107,11 @@
 
                     <div class="flex items-center justify-end gap-3 pt-6 border-t border-gray-100">
                         <a href="{{ route('admin.portfolios.index') }}"
-                            class="px-5 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-all">
+                            class="px-5 py-2.5 text-sm font-medium text-gray-600 bg-white border border-gray-300 rounded-lg 
+                            hover:bg-red-600 hover:text-white hover:border-red-600 
+                            active:bg-red-700 
+                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 
+                            transition-all">
                             Batal
                         </a>
                         <button type="submit"

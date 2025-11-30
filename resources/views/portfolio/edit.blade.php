@@ -16,7 +16,8 @@
 
                         <!-- Nama Proyek -->
                         <div class="mb-4">
-                            <label for="nama_proyek" class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
+                            <label for="nama_proyek"
+                                class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
                                 Nama Proyek
                             </label>
                             <input type="text" name="nama_proyek" id="nama_proyek"
@@ -30,7 +31,8 @@
 
                         <!-- Deskripsi -->
                         <div class="mb-4">
-                            <label for="deskripsi" class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
+                            <label for="deskripsi"
+                                class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">
                                 Deskripsi
                             </label>
                             <textarea name="deskripsi" id="deskripsi" rows="4"
@@ -55,13 +57,16 @@
                             @enderror
                         </div> <!-- Upload PDF (Edit) -->
                         <div class="mb-4">
-                            <label for="pdf_file" class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">Ubah file PDF
+                            <label for="pdf_file"
+                                class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">Ubah file PDF
                                 CV</label>
-                            <input type="file" name="pdf_file" class="w-full border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-100"
+                            <input type="file" name="pdf_file"
+                                class="w-full border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-100"
                                 accept="application/pdf">
                             @if ($portfolio->pdf_file)
                                 <p class="text-blue-500 dark:text-blue-300 text-sm">
-                                    <a href="{{ asset('storage/' . $portfolio->pdf_file) }}" target="_blank" class="hover:text-blue-700 dark:hover:text-blue-400">Lihat file
+                                    <a href="{{ asset('storage/' . $portfolio->pdf_file) }}" target="_blank"
+                                        class="hover:text-blue-700 dark:hover:text-blue-400">Lihat file
                                         CV yang ada</a>
                                 </p>
                             @endif
@@ -74,7 +79,7 @@
                                 Update Portofolio
                             </button>
                             <a href="{{ route('portfolio.index') }}"
-                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:hover:bg-gray-700">
+                                class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline dark:bg-red-600 dark:hover:bg-red-700 transition-colors">
                                 Batal
                             </a>
                         </div>

@@ -150,14 +150,14 @@
 
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <h4 class="text-lg font-semibold mb-3">Distribusi Mahasiswa per Prodi</h4>
+                            <h4 class="text-lg font-semibold mb-3">Jumlah Mahasiswa Perprodi</h4>
                             @if (isset($studentsPerProdi) && $studentsPerProdi->count())
                                 <div class="space-y-3">
                                     @foreach ($studentsPerProdi as $row)
                                         <div class="flex items-center justify-between">
-                                            <div class="text-sm text-gray-700 dark:text-gray-100">
+                                            <div class="text-base text-gray-9000 dark:text-gray-100">
                                                 {{ $row->prodi ?? 'Umum' }}</div>
-                                            <div class="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                            <div class="text-lg font-bold text-gray-900 dark:text-gray-200">
                                                 {{ $row->total }}</div>
                                         </div>
                                     @endforeach
@@ -173,7 +173,7 @@
                 <div class="lg:col-span-1">
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                         <div class="p-6 text-gray-900 dark:text-gray-100">
-                            <h4 class="text-lg font-semibold">Mahasiswa Terbaru</h4>
+                            <h4 class="text-lg font-semibold">Mahasiswa Angkatan Terbaru</h4>
                             @if (isset($latestStudents) && $latestStudents->count())
                                 <ul class="mt-4 space-y-3">
                                     @foreach ($latestStudents as $s)
