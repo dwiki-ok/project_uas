@@ -4,9 +4,6 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Tambah Akun Mahasiswa') }}
             </h2>
-            <a href="{{ url()->previous() }}" class="text-sm text-gray-600 hover:text-gray-900">
-                &larr; Kembali
-            </a>
         </div>
     </x-slot>
 
@@ -17,7 +14,8 @@
 
                     <div class="mb-6 text-center">
                         <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100">Form Data Mahasiswa</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Lengkapi data berikut untuk membuat akun direktori portofolio.
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Lengkapi data berikut untuk membuat akun
+                            direktori portofolio.
                         </p>
                     </div>
 
@@ -26,7 +24,8 @@
                         @csrf
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100 mb-2" for="photo">
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100 mb-2"
+                                for="photo">
                                 Foto Profil
                             </label>
                             <div class="flex items-center space-x-4">
@@ -61,7 +60,8 @@
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="name">Nama Lengkap</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="name">Nama Lengkap</label>
                             <input id="name"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 type="text" name="name" :value="old('name')" required autofocus />
@@ -71,7 +71,8 @@
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="email">Email</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="email">Email</label>
                             <input id="email"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 type="email" name="email" :value="old('email')" required />
@@ -81,7 +82,8 @@
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="prodi">Program Studi</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="prodi">Program Studi</label>
                             <select id="prodi" name="prodi"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 <option value="" disabled selected>-- Pilih Program Studi --</option>
@@ -99,7 +101,8 @@
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="nrp">NRP</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="nrp">NRP</label>
                             <input id="nrp"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 type="text" name="nrp" :value="old('nrp')" required />
@@ -109,14 +112,16 @@
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="tahun_masuk">Tahun Masuk</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="tahun_masuk">Tahun Masuk</label>
                             <input id="tahun_masuk"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 type="number" name="tahun_masuk" value="{{ date('Y') }}" required />
                         </div>
 
                         <div>
-                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100" for="password">Password</label>
+                            <label class="block font-medium text-sm text-gray-700 dark:text-gray-100"
+                                for="password">Password</label>
                             <input id="password"
                                 class="block mt-1 w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                 type="password" name="password" required autocomplete="new-password" />
@@ -135,18 +140,20 @@
 
                         <div class="flex items-center justify-end mt-4 gap-3">
                             <a href="{{ route('admin.index') }}"
-                                class="inline-flex items-center px-4 py-2 bg-gray-200 dark:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-gray-700 dark:text-gray-100 uppercase tracking-widest hover:bg-gray-300 dark:hover:bg-gray-600 active:bg-gray-400 focus:outline-none focus:border-gray-400 focus:ring ring-gray-200 disabled:opacity-25 transition ease-in-out duration-150">
+                                class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-800 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition ease-in-out duration-150">
                                 Batal
                             </a>
+
                             <button type="submit"
-                                class="inline-flex justify-center items-center px-4 py-3 bg-blue-600 dark:bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-md">
+                                class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 disabled:opacity-25 transition ease-in-out duration-150">
                                 Daftar
                             </button>
                         </div>
-                    </form>
-
                 </div>
+                </form>
+
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
