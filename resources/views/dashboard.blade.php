@@ -33,7 +33,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-green-100 text-sm font-medium">Total Mahasiswa</p>
-                                <p class="text-3xl font-bold mt-2">{{ $allMahasiswa->count() }}</p>
+                                <p class="text-3xl font-bold mt-2">{{ $allMahasiswa->total() }}</p>
                             </div>
                             <svg class="w-12 h-12 text-green-300 opacity-50" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM9 6a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -64,7 +64,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-orange-100 text-sm font-medium">Mahasiswa Lain</p>
-                                <p class="text-3xl font-bold mt-2">{{ $allMahasiswa->count() }}</p>
+                                <p class="text-3xl font-bold mt-2">{{ $allMahasiswa->total() }}</p>
                             </div>
                             <svg class="w-12 h-12 text-orange-300 opacity-50" fill="currentColor" viewBox="0 0 20 20">
                                 <path
@@ -358,13 +358,13 @@
                                         class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded">
                                         <span class="text-gray-700 dark:text-gray-300">Total Mahasiswa</span>
                                         <span
-                                            class="text-2xl font-bold text-purple-600">{{ $allMahasiswa->count() }}</span>
+                                            class="text-2xl font-bold text-purple-600">{{ $allMahasiswa->total() }}</span>
                                     </div>
                                     <div
                                         class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded">
                                         <span class="text-gray-700 dark:text-gray-300">Mahasiswa Aktif Lainnya</span>
                                         <span
-                                            class="text-2xl font-bold text-blue-600">{{ $allMahasiswa->count() }}</span>
+                                            class="text-2xl font-bold text-blue-600">{{ $allMahasiswa->total() }}</span>
                                     </div>
                                     <div
                                         class="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded">

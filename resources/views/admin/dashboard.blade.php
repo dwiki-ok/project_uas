@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight">
-            {{ __('Dashboard Administrator') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -76,7 +71,10 @@
                             <div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 2.25H6.75A1.5 1.5 0 0 0 5.25 3.75v16.5A1.5 1.5 0 0 0 6.75 21.75h10.5a1.5 1.5 0 0 0 1.5-1.5V9" />
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9.75 13.5h6M9.75 16.5h4.5" />
                                 </svg>
                             </div>
                             <div>
