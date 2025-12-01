@@ -36,7 +36,7 @@
 
                 <!-- Upload PDF -->
                 <div class="mb-4">
-                    <label class="block font-medium text-gray-800 dark:text-gray-200">Upload CV (PDF)</label>
+                    <label class="block font-medium text-gray-800 dark:text-gray-200">Upload portofolio (PDF)</label>
                     <input type="file" name="pdf_file"
                         class="w-full border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-100"
                         accept="application/pdf">

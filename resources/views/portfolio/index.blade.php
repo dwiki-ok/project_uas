@@ -1,13 +1,15 @@
 <x-app-layout>
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('portfolio.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block dark:bg-blue-600 dark:hover:bg-blue-700">
+            <a href="{{ route('portfolio.create') }}"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mb-4 inline-block dark:bg-blue-600 dark:hover:bg-blue-700">
                 + Tambah Portofolio
             </a>
             @foreach ($portfolios as $p)
-                <div class="p-4 bg-white dark:bg-gray-800 dark:border-gray-700 rounded shadow mb-4 flex justify-between items-center gap-4">
+                <div
+                    class="p-4 bg-white dark:bg-gray-800 dark:border-gray-700 rounded shadow mb-4 flex justify-between items-center gap-4">
 
-                        <div class="flex-1 space-y-3 min-w-0 text-gray-800 dark:text-gray-100">
+                    <div class="flex-1 space-y-3 min-w-0 text-gray-800 dark:text-gray-100">
                         <div class="flex items-center">
                             <span class="font-bold text-lg w-32 shrink-0">Nama Project</span>
                             <span class="font-bold text-lg mr-2">:</span>
@@ -29,10 +31,11 @@
                         <!-- Menampilkan File PDF jika ada -->
                         @if ($p->pdf_file)
                             <div class="flex items-center">
-                                <span class="font-bold text-lg w-32 shrink-0">CV</span>
+                                <span class="font-bold text-lg w-32 shrink-0">portofolio</span>
                                 <span class="font-bold text-lg mr-2">:</span>
                                 <a href="{{ asset('storage/' . $p->pdf_file) }}" target="_blank"
-                                    class="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400">Lihat CV</a>
+                                    class="text-blue-500 hover:text-blue-700 dark:text-blue-300 dark:hover:text-blue-400">Lihat
+                                    portofolio</a>
                             </div>
                         @endif
                     </div>

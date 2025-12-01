@@ -59,7 +59,7 @@
                         <div class="mb-4">
                             <label for="pdf_file"
                                 class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2">Ubah file PDF
-                                CV</label>
+                                portofolio</label>
                             <input type="file" name="pdf_file"
                                 class="w-full border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-100"
                                 accept="application/pdf">
@@ -67,7 +67,7 @@
                                 <p class="text-blue-500 dark:text-blue-300 text-sm">
                                     <a href="{{ asset('storage/' . $portfolio->pdf_file) }}" target="_blank"
                                         class="hover:text-blue-700 dark:hover:text-blue-400">Lihat file
-                                        CV yang ada</a>
+                                        portofolio yang ada</a>
                                 </p>
                             @endif
                         </div>
