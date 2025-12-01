@@ -39,12 +39,12 @@
 
                         <div class="flex items-center gap-2 w-full md:w-auto">
                             <span class="text-sm font-medium text-gray-500">Tampilkan</span>
-                            <select
-                                class="border-gray-200 bg-gray-50 rounded-lg text-sm focus:ring-indigo-500 focus:border-indigo-500 form-select py-2">
-                                <option>10</option>
-                                <option>25</option>
-                                <option>50</option>
-                                <option>semua</option>
+                            <select name="per_page" onchange="this.form.submit()"
+                                class="border-gray-200 bg-gray-50 rounded-lg text-sm focus:ring-indigo-500 focus:border-indigo-500 form-select py-2 cursor-pointer">
+                                <option value="10" {{ request('per_page') == '10' ? 'selected' : '' }}>10</option>
+                                <option value="25" {{ request('per_page') == '25' ? 'selected' : '' }}>25</option>
+                                <option value="50" {{ request('per_page') == '50' ? 'selected' : '' }}>50</option>
+                                <option value="all" {{ request('per_page') == 'all' ? 'selected' : '' }}>Semua</option>
                             </select>
                         </div>
 
