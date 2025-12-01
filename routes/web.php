@@ -17,9 +17,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         $user = request()->user();
         $portfolios = $user ? $user->portfolios()->latest()->get() : collect();
-        $allMahasiswa = User::where('role', 'mahasiswa')->with('portfolios')->get();
+        $allMahasiswa = User::where('role', 'mahasiswa')
+        ->where('id', '!=', $user->id)   
+        ->with('portfolios')
+        ->paginate(4);            
+
         return view('dashboard', compact('user', 'portfolios', 'allMahasiswa'));
     })->name('dashboard');
+
+    Route::get('/about', function () {
+    return view('about');
+    })->name('about');
 
     // Profile mahasiswa
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

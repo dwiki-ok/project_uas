@@ -1,22 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
-            @if (isset($user))
-                <span class="text-sm text-gray-600 dark:text-gray-400">Selamat datang,
-                    <strong>{{ $user->name }}</strong></span>
-            @endif
-        </div>
-    </x-slot>
+
+    {{-- Sapaan --}}
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-6">
+        <h1 class="text-lg font-normal text-gray-300 dark:text-gray-200">
+            Selamat datang, {{ $user->name }} 🫡
+        </h1>
+    </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Statistik Cards Section -->
+
+            {{-- ===================== KARTU STATISTIK ATAS ===================== --}}
             @if (isset($user))
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <!-- Total Portfolio Card -->
+                    {{-- Total Portfolio --}}
                     <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-6 text-white">
                         <div class="flex items-center justify-between">
                             <div>
@@ -31,7 +28,7 @@
                         </div>
                     </div>
 
-                    <!-- Total Mahasiswa Card -->
+                    {{-- Total Mahasiswa --}}
                     <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-6 text-white">
                         <div class="flex items-center justify-between">
                             <div>
@@ -45,7 +42,7 @@
                         </div>
                     </div>
 
-                    <!-- Profile Completion Card -->
+                    {{-- Profil Lengkap --}}
                     <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg p-6 text-white">
                         <div class="flex items-center justify-between">
                             <div>
@@ -62,7 +59,7 @@
                         </div>
                     </div>
 
-                    <!-- Mahasiswa Lain Card -->
+                    {{-- Mahasiswa Lain --}}
                     <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg shadow-lg p-6 text-white">
                         <div class="flex items-center justify-between">
                             <div>
@@ -77,146 +74,30 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Profile Completion Progress -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Status Profil</h3>
-                    <div class="space-y-4">
-                        <!-- Nama -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Nama Lengkap</span>
-                                <span class="text-xs font-semibold text-green-600">✓ Lengkap</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
-                            </div>
-                        </div>
-
-                        <!-- NRP -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">NRP</span>
-                                <span class="text-xs font-semibold text-green-600">✓ Lengkap</span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Foto Profil -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Foto Profil</span>
-                                <span
-                                    class="text-xs font-semibold {{ $user->profile_photo ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $user->profile_photo ? '✓ Lengkap' : '✗ Belum' }}
-                                </span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                <div class="bg-{{ $user->profile_photo ? 'green' : 'red' }}-500 h-2 rounded-full"
-                                    style="width: {{ $user->profile_photo ? '100' : '0' }}%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Prodi -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Program Studi</span>
-                                <span
-                                    class="text-xs font-semibold {{ $user->prodi ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $user->prodi ? '✓ Lengkap' : '✗ Belum' }}
-                                </span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                <div class="bg-{{ $user->prodi ? 'green' : 'red' }}-500 h-2 rounded-full"
-                                    style="width: {{ $user->prodi ? '100' : '0' }}%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Tahun Masuk -->
-                        <div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Tahun Masuk</span>
-                                <span
-                                    class="text-xs font-semibold {{ $user->tahun_masuk ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $user->tahun_masuk ? '✓ Lengkap' : '✗ Belum' }}
-                                </span>
-                            </div>
-                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                                <div class="bg-{{ $user->tahun_masuk ? 'green' : 'red' }}-500 h-2 rounded-full"
-                                    style="width: {{ $user->tahun_masuk ? '100' : '0' }}%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             @endif
 
-            <!-- Quick Actions Section -->
-            @if (isset($user))
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Aksi Cepat</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a href="{{ route('profile.edit') }}"
-                            class="flex items-center gap-3 p-4 bg-indigo-50 dark:bg-indigo-900 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-800 transition">
-                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                </path>
-                            </svg>
-                            <div>
-                                <p class="font-semibold text-gray-800 dark:text-gray-100">Edit Profil</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">Update informasi profil Anda</p>
-                            </div>
-                        </a>
+            {{-- ===================== TAB PROFIL / MAHASISWA LAIN / STATISTIK ===================== --}}
+<div class="mb-6 flex gap-2 border-b border-gray-200 dark:border-gray-700">
+    <button onclick="showTab('profil-saya', event)"
+        data-tab="profil-saya"
+        class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold">
+        Profil Saya
+    </button>
+    <button onclick="showTab('mahasiswa-lain', event)"
+        data-tab="mahasiswa-lain"
+        class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold">
+        Mahasiswa Lain
+    </button>
+    <button onclick="showTab('statistik', event)"
+        data-tab="statistik"
+        class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold">
+        Statistik
+    </button>
+</div>
 
-                        <a href="{{ route('portfolio.create') }}"
-                            class="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900 rounded-lg hover:bg-green-100 dark:hover:bg-green-800 transition">
-                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4"></path>
-                            </svg>
-                            <div>
-                                <p class="font-semibold text-gray-800 dark:text-gray-100">Tambah Portfolio</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">Buat portfolio baru</p>
-                            </div>
-                        </a>
 
-                        <a href="{{ route('portfolio.index') }}"
-                            class="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-900 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition">
-                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                </path>
-                            </svg>
-                            <div>
-                                <p class="font-semibold text-gray-800 dark:text-gray-100">Kelola Portfolio</p>
-                                <p class="text-xs text-gray-600 dark:text-gray-400">Lihat semua portfolio Anda</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            @endif
 
-            <!-- Tab Navigation -->
-            <div class="mb-6 flex gap-2 border-b border-gray-200 dark:border-gray-700">
-                <button onclick="showTab('profil-saya', event)"
-                    class="tab-btn active px-4 py-2 border-b-2 border-indigo-600 text-indigo-600 font-semibold">
-                    Profil Saya
-                </button>
-                <button onclick="showTab('mahasiswa-lain', event)"
-                    class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold hover:text-indigo-600 dark:hover:text-indigo-400">
-                    Mahasiswa Lain
-                </button>
-                <button onclick="showTab('statistik', event)"
-                    class="tab-btn px-4 py-2 border-b-2 border-transparent text-gray-600 dark:text-gray-400 font-semibold hover:text-indigo-600 dark:hover:text-indigo-400">
-                    Statistik
-                </button>
-            </div>
-
+            {{-- TAB: PROFIL SAYA --}}
             <div id="profil-saya"
                 class="tab-content bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -239,20 +120,19 @@
                                             @endif
                                         </div>
                                         <div class="min-w-0">
-                                            <h3 class="text-2xl font-semibold text-indigo-600">{{ $user->name }}
-                                            </h3>
-                                            <p class="mt-1 text-lg"><strong
-                                                    class="text-gray-600 dark:text-gray-400">Nrp:</strong>
+                                            <h3 class="text-2xl font-semibold text-indigo-600">{{ $user->name }}</h3>
+                                            <p class="mt-1 text-lg">
+                                                <strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
                                                 <span
                                                     class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->nrp }}</span>
                                             </p>
-                                            <p class="mt-1 text-lg"><strong
-                                                    class="text-gray-600 dark:text-gray-400">Prodi:</strong>
+                                            <p class="mt-1 text-lg">
+                                                <strong class="text-gray-600 dark:text-gray-400">Prodi:</strong>
                                                 <span
                                                     class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->prodi ?? '-' }}</span>
                                             </p>
-                                            <p class="mt-1 text-lg"><strong
-                                                    class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
+                                            <p class="mt-1 text-lg">
+                                                <strong class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
                                                 <span
                                                     class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $user->tahun_masuk ?? '-' }}</span>
                                             </p>
@@ -287,8 +167,9 @@
                                         </a>
                                     </div>
                                     @if ($portfolios->isEmpty())
-                                        <p class="mt-3 text-gray-600 dark:text-gray-400">Belum ada portofolio yang
-                                            ditambahkan.</p>
+                                        <p class="mt-3 text-gray-600 dark:text-gray-400">
+                                            Belum ada portofolio yang ditambahkan.
+                                        </p>
                                     @else
                                         <ul class="mt-3 space-y-4">
                                             @foreach ($portfolios as $p)
@@ -297,13 +178,14 @@
                                                     <div class="flex items-center justify-between">
                                                         <div>
                                                             <div class="font-semibold text-indigo-600 text-xl">
-                                                                {{ $p->nama_proyek }}</div>
+                                                                {{ $p->nama_proyek }}
+                                                            </div>
                                                             <div class="text-base text-gray-600 dark:text-gray-300">
                                                                 {{ \Illuminate\Support\Str::limit($p->deskripsi, 120) }}
                                                             </div>
                                                             <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                                                                Keahlian:
-                                                                {{ $p->keahlian ?? '-' }}</div>
+                                                                Keahlian: {{ $p->keahlian ?? '-' }}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -319,117 +201,131 @@
                 </div>
             </div>
 
-            <div id="mahasiswa-lain"
-                class="tab-content hidden bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @if ($allMahasiswa->isEmpty())
-                        <p class="text-gray-600 dark:text-gray-400">Tidak ada mahasiswa lain.</p>
-                    @else
-                        <div class="space-y-6">
-                            @foreach ($allMahasiswa as $m)
-                                @if (isset($user) && $m->id !== $user->id)
-                                    <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            <div class="col-span-1">
-                                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
-                                                    <div class="flex items-center gap-4">
-                                                        <div class="flex-shrink-0">
-                                                            @if ($m->profile_photo)
-                                                                <img src="{{ asset('storage/' . $m->profile_photo) }}"
-                                                                    alt="{{ $m->name }}"
-                                                                    class="w-24 h-24 rounded-full object-cover">
-                                                            @else
-                                                                <div
-                                                                    class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                                                                    <span
-                                                                        class="text-gray-500 dark:text-gray-400 text-sm">No
-                                                                        Photo</span>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        <div class="min-w-0">
-                                                            <h4 class="text-2xl font-semibold text-indigo-600">
-                                                                {{ $m->name }}</h4>
-                                                            <p class="mt-2 text-lg"><strong
-                                                                    class="text-gray-600 dark:text-gray-400">Nrp:</strong>
-                                                                <span
-                                                                    class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->nrp }}</span>
-                                                            </p>
-                                                            <p class="mt-1 text-lg"><strong
-                                                                    class="text-gray-600 dark:text-gray-400">Prodi:</strong>
-                                                                <span
-                                                                    class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->prodi ?? '-' }}</span>
-                                                            </p>
-                                                            <p class="mt-1 text-lg"><strong
-                                                                    class="text-gray-600 dark:text-gray-400">Tahun
-                                                                    Masuk:</strong>
-                                                                <span
-                                                                    class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $m->tahun_masuk ?? '-' }}</span>
-                                                            </p>
-                                                            @if ($m->portfolios && $m->portfolios->first() && $m->portfolios->first()->pdf_file)
-                                                                <div class="mt-3">
-                                                                    <a href="{{ asset('storage/' . $m->portfolios->first()->pdf_file) }}"
-                                                                        target="_blank"
-                                                                        class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                                                                        <svg class="w-4 h-4" fill="none"
-                                                                            stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round"
-                                                                                stroke-width="2"
-                                                                                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z">
-                                                                            </path>
-                                                                        </svg>
-                                                                        Lihat CV
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                        </div>
+{{-- TAB: MAHASISWA LAIN --}}
+<div id="mahasiswa-lain"
+    class="tab-content hidden bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="p-6 text-gray-900 dark:text-gray-100">
+        @if ($allMahasiswa->isEmpty())
+            <p class="text-gray-600 dark:text-gray-400">Tidak ada mahasiswa lain.</p>
+        @else
+            <div class="space-y-6">
+                @foreach ($allMahasiswa as $m)
+                    {{-- kalau query sudah pakai where('id','!=',$user->id) if ini boleh dihapus --}}
+                    @if (isset($user) && $m->id !== $user->id)
+                        <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="col-span-1">
+                                    <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex-shrink-0">
+                                                @if ($m->profile_photo)
+                                                    <img src="{{ asset('storage/' . $m->profile_photo) }}"
+                                                         alt="{{ $m->name }}"
+                                                         class="w-24 h-24 rounded-full object-cover">
+                                                @else
+                                                    <div
+                                                        class="w-24 h-24 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                                        <span class="text-gray-500 dark:text-gray-400 text-sm">
+                                                            No Photo
+                                                        </span>
                                                     </div>
-                                                </div>
+                                                @endif
                                             </div>
-
-                                            <div class="md:col-span-2">
-                                                <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
-                                                    <h5 class="font-semibold text-indigo-600">Portofolio</h5>
-                                                    @if ($m->portfolios->isEmpty())
-                                                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Belum
-                                                            ada portofolio.</p>
-                                                    @else
-                                                        <ul class="mt-2 space-y-4">
-                                                            @foreach ($m->portfolios as $p)
-                                                                <li
-                                                                    class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-                                                                    <div class="font-semibold text-indigo-600 text-lg">
-                                                                        {{ $p->nama_proyek }}</div>
-                                                                    <div
-                                                                        class="text-sm text-gray-600 dark:text-gray-300">
-                                                                        {{ \Illuminate\Support\Str::limit($p->deskripsi, 100) }}
-                                                                    </div>
-                                                                    <div
-                                                                        class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                                                                        Keahlian: {{ $p->keahlian ?? '-' }}</div>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                                </div>
+                                            <div class="min-w-0">
+                                                <h4 class="text-2xl font-semibold text-indigo-600">
+                                                    {{ $m->name }}
+                                                </h4>
+                                                <p class="mt-2 text-lg">
+                                                    <strong class="text-gray-600 dark:text-gray-400">Nrp:</strong>
+                                                    <span
+                                                        class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                                        {{ $m->nrp }}
+                                                    </span>
+                                                </p>
+                                                <p class="mt-1 text-lg">
+                                                    <strong class="text-gray-600 dark:text-gray-400">Prodi:</strong>
+                                                    <span
+                                                        class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                                        {{ $m->prodi ?? '-' }}
+                                                    </span>
+                                                </p>
+                                                <p class="mt-1 text-lg">
+                                                    <strong class="text-gray-600 dark:text-gray-400">Tahun Masuk:</strong>
+                                                    <span
+                                                        class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                                        {{ $m->tahun_masuk ?? '-' }}
+                                                    </span>
+                                                </p>
+                                                @if ($m->portfolios && $m->portfolios->first() && $m->portfolios->first()->pdf_file)
+                                                    <div class="mt-3">
+                                                        <a href="{{ asset('storage/' . $m->portfolios->first()->pdf_file) }}"
+                                                           target="_blank"
+                                                           class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                                                                 viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      stroke-width="2"
+                                                                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707L13.293 3.293A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                                            </svg>
+                                                            Lihat CV
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                @endif
-                            @endforeach
+                                </div>
+
+                                <div class="md:col-span-2">
+                                    <div class="p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md">
+                                        <h5 class="font-semibold text-indigo-600">Portofolio</h5>
+                                        @if ($m->portfolios->isEmpty())
+                                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                                Belum ada portofolio.
+                                            </p>
+                                        @else
+                                            <ul class="mt-2 space-y-4">
+                                                @foreach ($m->portfolios as $p)
+                                                    <li
+                                                        class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                                                        <div class="font-semibold text-indigo-600 text-lg">
+                                                            {{ $p->nama_proyek }}
+                                                        </div>
+                                                        <div class="text-sm text-gray-600 dark:text-gray-300">
+                                                            {{ \Illuminate\Support\Str::limit($p->deskripsi, 100) }}
+                                                        </div>
+                                                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                                            Keahlian: {{ $p->keahlian ?? '-' }}
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endif
-                </div>
+                @endforeach
             </div>
 
-            <!-- Statistik Tab -->
+            {{-- PAGINATION --}}
+            <div class="mt-6">
+                {{ $allMahasiswa->appends(['tab' => 'mahasiswa-lain'])->links() }}
+            </div>
+        @endif
+    </div>
+</div>
+
+
+
+            {{-- TAB: STATISTIK --}}
             <div id="statistik"
                 class="tab-content hidden bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if (isset($user))
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Portfolio Statistics -->
+                            {{-- Statistik Portfolio --}}
                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md p-6">
                                 <h3 class="text-xl font-semibold text-indigo-600 mb-6">📊 Statistik Portfolio Anda</h3>
                                 <div class="space-y-4">
@@ -454,7 +350,7 @@
                                 </div>
                             </div>
 
-                            <!-- User Statistics -->
+                            {{-- Statistik Pengguna --}}
                             <div class="bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md p-6">
                                 <h3 class="text-xl font-semibold text-purple-600 mb-6">👥 Statistik Pengguna</h3>
                                 <div class="space-y-4">
@@ -479,16 +375,18 @@
                                 </div>
                             </div>
 
-                            <!-- Portfolio Details List -->
+                            {{-- Tabel detail portfolio --}}
                             <div class="md:col-span-2">
                                 <div class="bg-gray-50 dark:bg-gray-900 rounded-lg shadow-md p-6">
-                                    <h3 class="text-xl font-semibold text-indigo-600 mb-4">📋 Daftar Portfolio Saya
-                                    </h3>
+                                    <h3 class="text-xl font-semibold text-indigo-600 mb-4">📋 Daftar Portfolio Saya</h3>
                                     @if ($portfolios->isEmpty())
-                                        <p class="text-gray-600 dark:text-gray-400 text-center py-6">Belum ada
-                                            portfolio. <a href="{{ route('portfolio.create') }}"
-                                                class="text-indigo-600 hover:text-indigo-800 font-semibold">Buat
-                                                sekarang</a></p>
+                                        <p class="text-gray-600 dark:text-gray-400 text-center py-6">
+                                            Belum ada portfolio.
+                                            <a href="{{ route('portfolio.create') }}"
+                                                class="text-indigo-600 hover:text-indigo-800 font-semibold">
+                                                Buat sekarang
+                                            </a>
+                                        </p>
                                     @else
                                         <div class="overflow-x-auto">
                                             <table class="min-w-full text-sm">
@@ -540,42 +438,212 @@
                     @endif
                 </div>
             </div>
+
+            {{-- ===================== AKSI CEPAT ===================== --}}
+            @if (isset($user))
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8 mt-8">
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Aksi Cepat</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="{{ route('profile.edit') }}"
+                            class="flex items-center gap-3 p-4 bg-indigo-50 dark:bg-indigo-900 rounded-lg hover:bg-indigo-100 dark:hover:bg-indigo-800 transition">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                </path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-gray-100">Edit Profil</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Update informasi profil Anda</p>
+                            </div>
+                        </a>
+
+                        <a href="{{ route('portfolio.create') }}"
+                            class="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900 rounded-lg hover:bg-green-100 dark:hover:bg-green-800 transition">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-gray-100">Tambah Portfolio</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Buat portfolio baru</p>
+                            </div>
+                        </a>
+
+                        <a href="{{ route('portfolio.index') }}"
+                            class="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-900 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                            <div>
+                                <p class="font-semibold text-gray-800 dark:text-gray-100">Kelola Portfolio</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Lihat semua portfolio Anda</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @endif
+
+            {{-- ===================== STATUS PROFIL ===================== --}}
+{{-- STATUS PROFIL (bisa di-open/close) --}}
+@if (isset($user))
+    <div x-data="{ openStatus: false }"
+         class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+
+        {{-- Header yang bisa di-klik --}}
+        <button type="button"
+                @click="openStatus = !openStatus"
+                class="w-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                    Status Profil
+                </h3>
+            </div>
+
+            {{-- Icon panah atas/bawah --}}
+            <svg class="w-5 h-5 text-gray-500 transition-transform duration-200"
+                 :class="openStatus ? 'transform rotate-180' : ''"
+                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+
+        {{-- Isi progress bar (muncul hanya kalau openStatus = true) --}}
+        <div x-show="openStatus"
+             x-transition.opacity
+             class="mt-4 space-y-4">
+
+            {{-- Nama lengkap --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Nama Lengkap
+                    </span>
+                    <span class="text-xs font-semibold text-green-600">
+                        ✓ Lengkap
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+
+            {{-- NRP --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        NRP
+                    </span>
+                    <span class="text-xs font-semibold text-green-600">
+                        ✓ Lengkap
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+
+            {{-- Foto Profil --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Foto Profil
+                    </span>
+                    <span class="text-xs font-semibold {{ $user->profile_photo ? 'text-green-600' : 'text-red-600' }}">
+                        {{ $user->profile_photo ? '✓ Lengkap' : '✗ Belum' }}
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div class="bg-{{ $user->profile_photo ? 'green' : 'red' }}-500 h-2 rounded-full"
+                         style="width: {{ $user->profile_photo ? '100' : '0' }}%">
+                    </div>
+                </div>
+            </div>
+
+            {{-- Program Studi --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Program Studi
+                    </span>
+                    <span class="text-xs font-semibold {{ $user->prodi ? 'text-green-600' : 'text-red-600' }}">
+                        {{ $user->prodi ? '✓ Lengkap' : '✗ Belum' }}
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div class="bg-{{ $user->prodi ? 'green' : 'red' }}-500 h-2 rounded-full"
+                         style="width: {{ $user->prodi ? '100' : '0' }}%">
+                    </div>
+                </div>
+            </div>
+
+            {{-- Tahun Masuk --}}
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Tahun Masuk
+                    </span>
+                    <span class="text-xs font-semibold {{ $user->tahun_masuk ? 'text-green-600' : 'text-red-600' }}">
+                        {{ $user->tahun_masuk ? '✓ Lengkap' : '✗ Belum' }}
+                    </span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div class="bg-{{ $user->tahun_masuk ? 'green' : 'red' }}-500 h-2 rounded-full"
+                         style="width: {{ $user->tahun_masuk ? '100' : '0' }}%">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@endif
+
+
         </div>
     </div>
 
-    <script>
-        function showTab(tabName, event) {
-            // Hide all tabs
-            const tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(tab => tab.classList.add('hidden'));
+    {{-- ===================== SCRIPT TAB ===================== --}}
+<script>
+    function showTab(tabName, event) {
+        // Sembunyikan semua tab
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.add('hidden'));
 
-            // Remove active class from all buttons and set to inactive style
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('border-indigo-600', 'text-indigo-600');
-                btn.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-400');
-                btn.classList.remove('dark:hover:text-indigo-400'); // Clean up old classes if necessary
-            });
-
-            // Show selected tab
-            document.getElementById(tabName).classList.remove('hidden');
-
-            // Add active class to clicked button
-            if (event && event.target) {
-                event.target.classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-400');
-                event.target.classList.add('border-indigo-600', 'text-indigo-600');
-            }
+        // Tampilkan tab yang dipilih
+        const activeTab = document.getElementById(tabName);
+        if (activeTab) {
+            activeTab.classList.remove('hidden');
         }
 
-        // Initialize first tab (optional, but good practice)
-        document.addEventListener('DOMContentLoaded', () => {
-            // Ensure only the first tab is visible on load
-            const initialTab = document.getElementById('profil-saya');
-            const otherTabs = document.querySelectorAll('.tab-content:not(#profil-saya)');
-            if (initialTab) {
-                initialTab.classList.remove('hidden');
-            }
-            otherTabs.forEach(tab => tab.classList.add('hidden'));
+        // Reset semua tombol
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('border-indigo-600', 'text-indigo-600');
+            btn.classList.add('border-transparent', 'text-gray-600', 'dark:text-gray-400');
         });
-    </script>
+
+        // Tentukan tombol mana yang harus aktif
+        const activeBtn = (event && event.target)
+            ? event.target
+            : document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+
+        if (activeBtn) {
+            activeBtn.classList.remove('border-transparent', 'text-gray-600', 'dark:text-gray-400');
+            activeBtn.classList.add('border-indigo-600', 'text-indigo-600');
+        }
+    }
+
+    // Inisialisasi tab pertama berdasarkan query string (?tab=...)
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const tabFromUrl = params.get('tab') || 'profil-saya'; // default: profil-saya
+        showTab(tabFromUrl); // panggil tanpa event, akan cari button berdasarkan data-tab
+    });
+</script>
+
 </x-app-layout>
