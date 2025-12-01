@@ -65,7 +65,6 @@
 <section class="hidden lg:flex flex-col items-center justify-center text-center
                 absolute right-1/4 top-1/2 -translate-y-1/2 gap-4">
 
-    {{-- Logo PENS lebih besar --}}
     <img src="{{ asset('images/logo-pens.png') }}"
          alt="Logo PENS"
          class="h-48 md:h-56 w-auto drop-shadow-2xl">

@@ -1,18 +1,29 @@
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
+            <div class="flex items-center">
+                <!-- Logo + Brand PENS -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-100" />
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
+                        {{-- Logo PENS --}}
+                        <img src="{{ asset('images/logo-pens.png') }}" alt="Logo PENS"
+                             class="h-9 w-9 object-contain">
+
+                        {{-- Teks kampus --}}
+                        <div class="leading-tight hidden sm:block">
+                            <p class="text-sm font-semibold text-indigo-400">
+                                Politeknik Elektronika
+                            </p>
+                            <p class="text-sm font-semibold text-indigo-400">
+                                Negeri Surabaya
+                            </p>
+                        </div>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    
                     {{-- LOGIKA PEMISAHAN MENU --}}
                     @if(Auth::user()->role === 'admin')
                         {{-- MENU KHUSUS ADMIN --}}
@@ -24,6 +35,10 @@
                             {{ __('Kelola Mahasiswa') }}
                         </x-nav-link>
 
+                        {{-- Admin juga bisa lihat About kalau mau --}}
+                        <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                            {{ __('About') }}
+                        </x-nav-link>
                     @else
                         {{-- MENU KHUSUS MAHASISWA --}}
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -32,6 +47,10 @@
 
                         <x-nav-link :href="route('portfolio.index')" :active="request()->routeIs('portfolio.index')">
                             {{ __('Portofolio Saya') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                            {{ __('About') }}
                         </x-nav-link>
                     @endif
 
@@ -87,14 +106,16 @@
     <!-- Responsive Navigation Menu (Mobile) -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            
-             {{-- LOGIKA PEMISAHAN MENU MOBILE --}}
-             @if(Auth::user()->role === 'admin')
+            {{-- LOGIKA PEMISAHAN MENU MOBILE --}}
+            @if(Auth::user()->role === 'admin')
                 <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                     {{ __('Dashboard Admin') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                     {{ __('Kelola Mahasiswa') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                    {{ __('About') }}
                 </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -103,6 +124,9 @@
                 <x-responsive-nav-link :href="route('portfolio.index')" :active="request()->routeIs('portfolio.index')">
                     {{ __('Portofolio Saya') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                    {{ __('About') }}
+                </x-responsive-nav-link>
             @endif
 
         </div>
@@ -110,7 +134,7 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-700">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
             </div>
 
